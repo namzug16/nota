@@ -1,16 +1,20 @@
-# nota
+<h1 align="center">
+Nota
+</h1>
 
-A new Flutter project.
+<p align="center">
+<a href="https://flutter.dev"><img src="https://img.shields.io/badge/made%20with-%E2%9D%A4%20&&%20Flutter-blue" alt="Made with Flutter"/></a>
+<a href="https://pub.dev/packages/very_good_analysis"><img src="https://img.shields.io/badge/style-very_good_analysis-B22C89.svg" alt="Style: very good analysis"/></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="Liscense: MIT"/></a>
+</p>
+<p>
+<img src="https://github.com/namzug16/nota/raw/master/assets/nota_presentation.png"/>
+</p>
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+Most minimalistic and simple note-taking app.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p>
+<img src="https://github.com/namzug16/nota/raw/master/assets/nota_ss.png"/>
+</p>
