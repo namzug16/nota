@@ -33,6 +33,10 @@ class NotePage extends HookConsumerWidget {
       () {
         if (notes.first.isEmpty) {
           textController.text = notes.first;
+        }else{
+          if(textController.text.isEmpty){
+            textController.text = notes.first;
+          }
         }
         return null;
       },
