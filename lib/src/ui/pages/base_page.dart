@@ -9,6 +9,7 @@ import "package:nota/src/core/store_provider.dart";
 import "package:nota/src/ui/theme/theme.dart";
 import "package:nota/src/ui/widgets/colored_button.dart";
 import "package:oxidized/oxidized.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 class BasePage extends ConsumerWidget {
   const BasePage({
@@ -29,23 +30,6 @@ class BasePage extends ConsumerWidget {
     final notes = ref.watch(notesProvider);
 
     final notesNotifier = ref.watch(notesProvider.notifier);
-
-    // ref.listen<Option<NotaTheme>>(themeProvider, (oldState, state) {
-    //   state.when(
-    //     some: (t) => ref.watch(storeProvider).when(
-    //           some: (data) {
-    //             if (oldState != null && oldState.isSome()) {
-    //               print("Theme Changed");
-    //               print("Old Theme: ${oldState}");
-    //               print("New Theme: ${theme.safeUnwrap.other.name}");
-    //               data.setString("nota_theme", theme.safeUnwrap.other.name);
-    //             }
-    //           },
-    //           none: () {},
-    //         ),
-    //     none: () {},
-    //   );
-    // });
 
     return Scaffold(
       backgroundColor: theme.safeUnwrap.primary,
@@ -186,7 +170,7 @@ class _GithubProjectButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredButton(
       icon: FontAwesomeIcons.githubAlt,
-      onPressed: () {},
+      onPressed: () => launchUrl(Uri.parse("https://github.com/namzug16/nota")),
       toolTip: "Github project",
     );
   }
