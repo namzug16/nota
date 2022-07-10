@@ -2,6 +2,8 @@ import "package:flutter_test/flutter_test.dart";
 import "package:hooks_riverpod/hooks_riverpod.dart";
 import "package:nota/src/core/notes_provider.dart";
 
+// ignore_for_file: lines_longer_than_80_chars
+
 void main() {
   group("Notes Controller Tests", () {
     ProviderContainer getContainer() {
@@ -196,6 +198,55 @@ void main() {
       expect(notes().first, "one");
 
     });
+
+    test("Check Initial State then try to add new empty note", () {
+      final container = getContainer();
+
+      List<String> notes() => container.read(notesProvider);
+      final notesNotifier = container.read(notesProvider.notifier);
+
+      expect(notes().length, 1);
+      expect(notes().first, "");
+
+      notesNotifier.addNote();
+
+      expect(notes().length, 1);
+      expect(notes().first, "");
+
+    });
+
+    test("Check Initial State then modify note then create new note then modify initial note then try to crate new empty note", () {
+      final container = getContainer();
+
+      List<String> notes() => container.read(notesProvider);
+      final notesNotifier = container.read(notesProvider.notifier);
+
+      expect(notes().length, 1);
+      expect(notes().first, "");
+
+      notesNotifier.updateNote("one", 0);
+
+      expect(notes().length, 1);
+      expect(notes().first, "one");
+
+      notesNotifier.addNote();
+
+      expect(notes().length, 2);
+      expect(notes().first, "");
+
+      notesNotifier.updateNote("one", 1);
+
+      expect(notes().length, 2);
+      expect(notes().first, "one");
+
+      notesNotifier.addNote();
+
+      expect(notes().length, 2);
+      expect(notes().first, "");
+
+    });
+
+
 
   });
 }

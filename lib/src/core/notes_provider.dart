@@ -1,6 +1,5 @@
 import "package:hooks_riverpod/hooks_riverpod.dart";
 import "package:nota/src/core/store_provider.dart";
-import 'package:oxidized/oxidized.dart';
 
 final notesProvider = StateNotifierProvider<NotesController, List<String>>(
   NotesController.new,

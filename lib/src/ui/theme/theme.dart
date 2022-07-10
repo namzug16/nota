@@ -1,6 +1,6 @@
 import "dart:ui";
 import "package:hooks_riverpod/hooks_riverpod.dart";
-import 'package:nota/src/core/store_provider.dart';
+import "package:nota/src/core/store_provider.dart";
 
 final themeProvider = StateProvider<NotaTheme>(
   (ref) => ref.watch(storeProvider).when<NotaTheme>(
