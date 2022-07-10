@@ -31,131 +31,139 @@ class BasePage extends ConsumerWidget {
 
     final notesNotifier = ref.watch(notesProvider.notifier);
 
+    final mediaQueryHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: theme.safeUnwrap.primary,
-      body: Padding(
-        padding: const EdgeInsets.all(40),
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.centerRight,
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: mediaQueryHeight < 650 ? 800 : mediaQueryHeight,
+          child: Padding(
+            padding: const EdgeInsets.all(40),
+            child: Column(
               children: [
-                Center(
-                  child: Text(
-                    "Nota",
-                    style: GoogleFonts.playfairDisplay(
-                      color: theme.safeUnwrap.secondary,
-                      fontSize: 60,
+                Stack(
+                  alignment: Alignment.centerRight,
+                  children: [
+                    Center(
+                      child: Text(
+                        "Nota",
+                        style: GoogleFonts.playfairDisplay(
+                          color: theme.safeUnwrap.secondary,
+                          fontSize: 60,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                ColoredButton(
-                  icon: Icons.brightness_4_outlined,
-                  onPressed: () => ref.watch(themeProvider.notifier).update(
-                    (state) {
-                      ref.watch(storeProvider).when(
-                            some: (data) {
-                              data.setString(
-                                "nota_theme",
-                                state.safeUnwrap.other.name,
+                    ColoredButton(
+                      icon: Icons.brightness_4_outlined,
+                      onPressed: () => ref.watch(themeProvider.notifier).update(
+                        (state) {
+                          ref.watch(storeProvider).when(
+                                some: (data) {
+                                  data.setString(
+                                    "nota_theme",
+                                    state.safeUnwrap.other.name,
+                                  );
+                                },
+                                none: () {},
                               );
-                            },
-                            none: () {},
-                          );
-                      return Some(state.safeUnwrap.other);
-                    },
-                  ),
-                  toolTip: "Change to ${theme.safeUnwrap.other.name} theme",
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: ColoredButton(
-                    icon: FontAwesomeIcons.info,
-                    onPressed: () async {
-                      await showDialog<void>(
-                        context: context,
-                        builder: (_) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            backgroundColor: theme.safeUnwrap.primary,
-                            child: SizedBox.square(
-                              dimension: 300,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Center(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "Nota",
-                                        style: GoogleFonts.playfairDisplay(
-                                          color: theme.safeUnwrap.secondary,
-                                          fontSize: 40,
-                                        ),
+                          return Some(state.safeUnwrap.other);
+                        },
+                      ),
+                      toolTip: "Change to ${theme.safeUnwrap.other.name} theme",
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ColoredButton(
+                        icon: FontAwesomeIcons.info,
+                        onPressed: () async {
+                          await showDialog<void>(
+                            context: context,
+                            builder: (_) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor: theme.safeUnwrap.primary,
+                                child: SizedBox.square(
+                                  dimension: 300,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            "Nota",
+                                            style: GoogleFonts.playfairDisplay(
+                                              color: theme.safeUnwrap.secondary,
+                                              fontSize: 40,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            // ignore: lines_longer_than_80_chars
+                                            "Most minimalist and simple open source note taking web app",
+                                            style: GoogleFonts.playfairDisplay(
+                                              color: theme.safeUnwrap.secondary,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            "Made with ❤️ and Flutter",
+                                            style: GoogleFonts.playfairDisplay(
+                                              color: theme.safeUnwrap.secondary,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 20),
+                                          const _GithubProjectButton(),
+                                        ],
                                       ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        // ignore: lines_longer_than_80_chars
-                                        "Most minimalist and simple open source note taking web app",
-                                        style: GoogleFonts.playfairDisplay(
-                                          color: theme.safeUnwrap.secondary,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        "Made with ❤️ and Flutter",
-                                        style: GoogleFonts.playfairDisplay(
-                                          color: theme.safeUnwrap.secondary,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      const _GithubProjectButton(),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                    toolTip: "Info",
+                        toolTip: "Info",
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: child,
                   ),
                 ),
-              ],
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(40),
-                child: child,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const _GithubProjectButton(),
-                if (notes.length > 1)
-                  ColoredButton(
-                    icon: route.routeIcon,
-                    onPressed: () => context.go(route.path),
-                    toolTip: route.routeName,
-                  )
-                else
-                  const SizedBox(),
-                ColoredButton(
-                  icon: Icons.note_add_outlined,
-                  onPressed: () {
-                    notesNotifier.addNote();
-                    context.go(Routes.note.path);
-                  },
-                  toolTip: "New note",
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const _GithubProjectButton(),
+                    if (notes.length > 1)
+                      ColoredButton(
+                        icon: route.routeIcon,
+                        onPressed: () => context.go(route.path),
+                        toolTip: route.routeName,
+                      )
+                    else
+                      const SizedBox(),
+                    ColoredButton(
+                      icon: Icons.note_add_outlined,
+                      onPressed: () {
+                        notesNotifier.addNote();
+                        context.go(Routes.note.path);
+                      },
+                      toolTip: "New note",
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
