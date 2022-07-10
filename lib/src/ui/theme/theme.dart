@@ -1,21 +1,26 @@
 import "dart:ui";
 import "package:hooks_riverpod/hooks_riverpod.dart";
 import "package:nota/src/core/store_provider.dart";
+import "package:oxidized/oxidized.dart";
 
-final themeProvider = StateProvider<NotaTheme>(
-  (ref) => ref.watch(storeProvider).when<NotaTheme>(
+final themeProvider = StateProvider<Option<NotaTheme>>(
+  (ref) => ref.watch(storeProvider).when<Option<NotaTheme>>(
         some: (data) {
           final theme = data.getString("nota_theme");
           if (theme != null) {
-            return NotaTheme.fromName(theme);
+            return Some(NotaTheme.fromName(theme));
           } else {
             data.setString("nota_theme", NotaTheme.dark.name);
-            return NotaTheme.dark;
+            return const None();
           }
         },
-        none: () => NotaTheme.dark,
+        none: () => const None(),
       ),
 );
+
+extension SafeUnwrap on Option<NotaTheme> {
+  NotaTheme get safeUnwrap => unwrapOr(NotaTheme.dark);
+}
 
 enum NotaTheme {
   light,
@@ -23,7 +28,7 @@ enum NotaTheme {
 
   static NotaTheme fromName(String name) {
     return NotaTheme.values.firstWhere(
-      (element) => element.toString() == name,
+      (element) => element.name == name,
       orElse: () => NotaTheme.dark,
     );
   }
@@ -58,9 +63,9 @@ enum NotaTheme {
   String get name {
     switch (this) {
       case NotaTheme.light:
-        return "Light";
+        return "light";
       case NotaTheme.dark:
-        return "Dark";
+        return "dark";
     }
   }
 

@@ -47,18 +47,18 @@ class NotePage extends HookConsumerWidget {
               controller: textController,
               expands: true,
               maxLines: null,
-              cursorColor: theme.secondary,
+              cursorColor: theme.safeUnwrap.secondary,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: theme.secondary.withOpacity(0.1),
+                fillColor: theme.safeUnwrap.secondary.withOpacity(0.1),
                 border: UnderlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                focusColor: theme.secondary,
+                focusColor: theme.safeUnwrap.secondary,
               ),
               style: TextStyle(
-                color: theme.secondary,
+                color: theme.safeUnwrap.secondary,
               ),
               onChanged: (text) =>
                   ref.watch(notesProvider.notifier).updateNote(text, 0),

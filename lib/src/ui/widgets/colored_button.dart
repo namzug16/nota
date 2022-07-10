@@ -24,8 +24,8 @@ class ColoredButton extends HookConsumerWidget {
     final isHovering = useState<bool>(false);
 
     final _theme = isHovering.value
-        ? theme.other.isInverted(inverted)
-        : theme.isInverted(inverted);
+        ? theme.safeUnwrap.other.isInverted(inverted)
+        : theme.safeUnwrap.isInverted(inverted);
 
     return MouseRegion(
       onEnter: (_) => isHovering.value = true,

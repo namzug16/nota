@@ -31,7 +31,7 @@ class ListNotePage extends ConsumerWidget {
               context.go(Routes.note.path);
             },
             child: Card(
-              color: theme.secondary,
+              color: theme.safeUnwrap.secondary,
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
@@ -41,7 +41,7 @@ class ListNotePage extends ConsumerWidget {
                       child: Text(
                         note,
                         style: TextStyle(
-                          color: theme.primary,
+                          color: theme.safeUnwrap.primary,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,

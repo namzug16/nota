@@ -8,6 +8,7 @@ import "package:nota/src/core/notes_provider.dart";
 import "package:nota/src/core/store_provider.dart";
 import "package:nota/src/ui/theme/theme.dart";
 import "package:nota/src/ui/widgets/colored_button.dart";
+import "package:oxidized/oxidized.dart";
 
 class BasePage extends ConsumerWidget {
   const BasePage({
@@ -29,19 +30,25 @@ class BasePage extends ConsumerWidget {
 
     final notesNotifier = ref.watch(notesProvider.notifier);
 
-    ref.listen<NotaTheme>(themeProvider, (_, state) {
-      print("theme changed");
-      ref.watch(storeProvider).when(
-            some: (data) {
-              data.setString("nota_theme", state.name);
-              print(data.getString("nota_theme"));
-            },
-            none: (){},
-          );
-    });
+    // ref.listen<Option<NotaTheme>>(themeProvider, (oldState, state) {
+    //   state.when(
+    //     some: (t) => ref.watch(storeProvider).when(
+    //           some: (data) {
+    //             if (oldState != null && oldState.isSome()) {
+    //               print("Theme Changed");
+    //               print("Old Theme: ${oldState}");
+    //               print("New Theme: ${theme.safeUnwrap.other.name}");
+    //               data.setString("nota_theme", theme.safeUnwrap.other.name);
+    //             }
+    //           },
+    //           none: () {},
+    //         ),
+    //     none: () {},
+    //   );
+    // });
 
     return Scaffold(
-      backgroundColor: theme.primary,
+      backgroundColor: theme.safeUnwrap.primary,
       body: Padding(
         padding: const EdgeInsets.all(40),
         child: Column(
@@ -53,7 +60,7 @@ class BasePage extends ConsumerWidget {
                   child: Text(
                     "Nota",
                     style: GoogleFonts.playfairDisplay(
-                      color: theme.secondary,
+                      color: theme.safeUnwrap.secondary,
                       fontSize: 60,
                     ),
                   ),
@@ -61,9 +68,20 @@ class BasePage extends ConsumerWidget {
                 ColoredButton(
                   icon: Icons.brightness_4_outlined,
                   onPressed: () => ref.watch(themeProvider.notifier).update(
-                        (state) => state.other,
-                      ),
-                  toolTip: "Change to ${theme.other.name} theme",
+                    (state) {
+                      ref.watch(storeProvider).when(
+                            some: (data) {
+                              data.setString(
+                                "nota_theme",
+                                state.safeUnwrap.other.name,
+                              );
+                            },
+                            none: () {},
+                          );
+                      return Some(state.safeUnwrap.other);
+                    },
+                  ),
+                  toolTip: "Change to ${theme.safeUnwrap.other.name} theme",
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -77,7 +95,7 @@ class BasePage extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            backgroundColor: theme.primary,
+                            backgroundColor: theme.safeUnwrap.primary,
                             child: SizedBox.square(
                               dimension: 300,
                               child: Padding(
@@ -89,7 +107,7 @@ class BasePage extends ConsumerWidget {
                                       Text(
                                         "Nota",
                                         style: GoogleFonts.playfairDisplay(
-                                          color: theme.secondary,
+                                          color: theme.safeUnwrap.secondary,
                                           fontSize: 40,
                                         ),
                                       ),
@@ -98,7 +116,7 @@ class BasePage extends ConsumerWidget {
                                         // ignore: lines_longer_than_80_chars
                                         "Most minimalistic and simple open source note taking web app",
                                         style: GoogleFonts.playfairDisplay(
-                                          color: theme.secondary,
+                                          color: theme.safeUnwrap.secondary,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -106,7 +124,7 @@ class BasePage extends ConsumerWidget {
                                       Text(
                                         "Made with ❤️ and Flutter",
                                         style: GoogleFonts.playfairDisplay(
-                                          color: theme.secondary,
+                                          color: theme.safeUnwrap.secondary,
                                         ),
                                       ),
                                       const SizedBox(height: 20),

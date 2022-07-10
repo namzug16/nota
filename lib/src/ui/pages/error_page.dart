@@ -22,7 +22,7 @@ class ErrorPage extends ConsumerWidget {
               child: Text(
                 "404",
                 style: GoogleFonts.playfairDisplay(
-                  color: theme.secondary,
+                  color: theme.safeUnwrap.secondary,
                   fontSize: 300,
                 ),
               ),
@@ -30,7 +30,7 @@ class ErrorPage extends ConsumerWidget {
             Text(
               "Page not found",
               style: GoogleFonts.playfairDisplay(
-                color: theme.secondary,
+                color: theme.safeUnwrap.secondary,
                 fontSize: 20,
               ),
             ),
