@@ -9,7 +9,7 @@ import "package:nota/src/core/store_provider.dart";
 import "package:nota/src/ui/theme/theme.dart";
 import "package:nota/src/ui/widgets/colored_button.dart";
 import "package:oxidized/oxidized.dart";
-import 'package:url_launcher/url_launcher.dart';
+import "package:url_launcher/url_launcher.dart";
 
 class BasePage extends ConsumerWidget {
   const BasePage({

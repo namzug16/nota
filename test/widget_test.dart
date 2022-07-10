@@ -34,7 +34,6 @@ void main() {
 
       expect(notes().length, 1);
       expect(notes().first, "one");
-
     });
 
     test("Check Initial State then update first note then add new note", () {
@@ -55,10 +54,11 @@ void main() {
 
       expect(notes().length, 2);
       expect(notes().first, "");
-
     });
 
-    test("Check Initial State then update first note then add new note then modify new note", () {
+    test(
+        "Check Initial State then update first note then add new note then modify new note",
+        () {
       final container = getContainer();
 
       List<String> notes() => container.read(notesProvider);
@@ -81,45 +81,11 @@ void main() {
 
       expect(notes().length, 2);
       expect(notes().first, "two");
-
     });
 
-    test("Check Initial State then update first note then add new note then modify new note then change order of notes", () {
-      final container = getContainer();
-
-      List<String> notes() => container.read(notesProvider);
-      final notesNotifier = container.read(notesProvider.notifier);
-
-      expect(notes().length, 1);
-      expect(notes().first, "");
-
-      notesNotifier.updateNote("one", 0);
-
-      expect(notes().length, 1);
-      expect(notes().first, "one");
-
-      notesNotifier.addNote();
-
-      expect(notes().length, 2);
-      expect(notes().first, "");
-
-      notesNotifier.updateNote("two", 0);
-
-      expect(notes().length, 2);
-      expect(notes().first, "two");
-      expect(notes().last, "one");
-
-      final note2 = notes()[1];
-
-      notesNotifier.updateNote(note2, 1);
-
-      expect(notes().length, 2);
-      expect(notes().first, "one");
-      expect(notes().last, "two");
-
-    });
-
-    test("Check Initial State then update first note then add new note then modify new note then change order of notes then delete second note", () {
+    test(
+        "Check Initial State then update first note then add new note then modify new note then change order of notes",
+        () {
       final container = getContainer();
 
       List<String> notes() => container.read(notesProvider);
@@ -151,15 +117,11 @@ void main() {
       expect(notes().length, 2);
       expect(notes().first, "one");
       expect(notes().last, "two");
-
-      notesNotifier.deleteNote(1);
-
-      expect(notes().length, 1);
-      expect(notes().first, "one");
-
     });
 
-    test("Check Initial State then update first note then add new note then modify new note then change order of notes then delete second note", () {
+    test(
+        "Check Initial State then update first note then add new note then modify new note then change order of notes then delete second note",
+        () {
       final container = getContainer();
 
       List<String> notes() => container.read(notesProvider);
@@ -196,7 +158,47 @@ void main() {
 
       expect(notes().length, 1);
       expect(notes().first, "one");
+    });
 
+    test(
+        "Check Initial State then update first note then add new note then modify new note then change order of notes then delete second note",
+        () {
+      final container = getContainer();
+
+      List<String> notes() => container.read(notesProvider);
+      final notesNotifier = container.read(notesProvider.notifier);
+
+      expect(notes().length, 1);
+      expect(notes().first, "");
+
+      notesNotifier.updateNote("one", 0);
+
+      expect(notes().length, 1);
+      expect(notes().first, "one");
+
+      notesNotifier.addNote();
+
+      expect(notes().length, 2);
+      expect(notes().first, "");
+
+      notesNotifier.updateNote("two", 0);
+
+      expect(notes().length, 2);
+      expect(notes().first, "two");
+      expect(notes().last, "one");
+
+      final note2 = notes()[1];
+
+      notesNotifier.updateNote(note2, 1);
+
+      expect(notes().length, 2);
+      expect(notes().first, "one");
+      expect(notes().last, "two");
+
+      notesNotifier.deleteNote(1);
+
+      expect(notes().length, 1);
+      expect(notes().first, "one");
     });
 
     test("Check Initial State then try to add new empty note", () {
@@ -212,10 +214,11 @@ void main() {
 
       expect(notes().length, 1);
       expect(notes().first, "");
-
     });
 
-    test("Check Initial State then modify note then create new note then modify initial note then try to crate new empty note", () {
+    test(
+        "Check Initial State then modify note then create new note then modify initial note then try to crate new empty note",
+        () {
       final container = getContainer();
 
       List<String> notes() => container.read(notesProvider);
@@ -243,10 +246,6 @@ void main() {
 
       expect(notes().length, 2);
       expect(notes().first, "");
-
     });
-
-
-
   });
 }
