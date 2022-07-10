@@ -13,7 +13,7 @@ Nota
 
 ---
 
-Most minimalistic and simple note-taking app.
+Most minimalist and simple note-taking app.
 
 <p>
 <img src="https://github.com/namzug16/nota/raw/master/assets/nota_ss.png"/>

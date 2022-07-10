@@ -98,7 +98,7 @@ class BasePage extends ConsumerWidget {
                                       const SizedBox(height: 20),
                                       Text(
                                         // ignore: lines_longer_than_80_chars
-                                        "Most minimalistic and simple open source note taking web app",
+                                        "Most minimalist and simple open source note taking web app",
                                         style: GoogleFonts.playfairDisplay(
                                           color: theme.safeUnwrap.secondary,
                                         ),
