@@ -14,6 +14,7 @@ Nota
 ---
 
 Most minimalist and simple note-taking app.
+Try it out now!!! [Nota](https://namzug16.github.io/nota/)
 
 <p>
 <img src="https://github.com/namzug16/nota/raw/master/assets/nota_ss.png"/>
